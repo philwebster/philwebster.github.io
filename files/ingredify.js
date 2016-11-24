@@ -6,7 +6,9 @@ function ingredify(){
 
 function getSelectedLines() {
 	var text = getSelectedText();
-	var lines = text.split("\n");
+	var lines = text.split("\n").filter(function(s){
+		return s.length > 0;
+	});
 	return lines;
 }
 

@@ -1,10 +1,16 @@
 
 function ingredify(){
-	var text = getSelectionText();
-	console.log(text);
+	var lines = getSelectedLines();
+	console.log(lines);
 }
 
-function getSelectionText() {
+function getSelectedLines() {
+	var text = getSelectedText();
+	var lines = text.split("\n");
+	return lines;
+}
+
+function getSelectedText() {
     var text = "";
     if (typeof window.getSelection != "undefined") {
         var sel = window.getSelection();

@@ -1,1 +1,4 @@
-console.log("hello");
+
+function ingredify(){
+	console.log("hello");
+}

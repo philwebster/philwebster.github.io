@@ -27,12 +27,12 @@ function ingredify() {
     // Determine selected options
 
 	for (var line in lines) {
-		var strippedLine = line.replace(/\([^\)]*\)$/, "");
-		var tokenizedLine = strippedLine.split(" ");
+		line.replace(/\([^\)]*\)$/, "");
+		var tokenizedLine = line.split(" ");
 		if (tokenizedLine.length == 1) {
 			continue;
 		}
-		var foundWordWithMultipleMatches = false
+		var foundWordWithMultipleMatches = false;
 
 		while (foundWordWithMultipleMatches != true && tokenizedLine.length > 0) {
 			lastWord = tokenizedLine.pop();

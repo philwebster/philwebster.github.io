@@ -41,7 +41,8 @@ function ingredify() {
 		    var options = {
 		    	"filter": filterMark, 
 	       	   	"element": "div", 
-			   	"className": "tooltip", 
+			   	"className": "tooltip",
+			   	"accuracy": "exactly", 
 			   	"each": function(node){
 	        		var tooltip = document.createElement("span");
 					tooltip.className = "tooltiptext";

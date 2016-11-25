@@ -1,11 +1,151 @@
+var tooltipText;
+var isFirstOccurrence = true;
 
-function ingredify(){
+function filterMark(textNode, foundTerm, totalCounter, counter) {
+	console.log("filtermark");
+	console.log(textNode);
+	if (textNode.parentNode.className == "tooltip" || textNode.parentNode.className == "tooltiptext" || isFirstOccurrence == true) {
+		console.log("doing the right thing");
+		isFirstOccurrence = false;
+		return false;
+	}
+	return true;
+}
+
+function insertTooltip(node) {
+	var tooltip = document.createElement("span");
+	tooltip.className = "tooltiptext";
+	tooltip.innerHTML = tooltiptext;
+	node.appendChild(tooltip);
+}
+
+function ingredify() {
+
 	var lines = getSelectedLines();
 	console.log(lines);
+	
+	if (!lines) {
+		return;
+	}
+
+    // Determine selected options
+
+	for (var line in lines) {
+		console.log("marking line: " + lines[line]);
+		var tokenizedLine = lines[line].split(" ");
+		var foundWordWithMultipleMatches = false
+
+		while (foundWordWithMultipleMatches != true && tokenizedLine.length > 0) {
+			lastWord = tokenizedLine.pop()
+			console.log("last word: " + lastWord)
+			lastWord = lastWord.replace(/^[,]|[,]$/g, "");
+			console.log("last word cleaned: " + lastWord)
+		    var options = {
+		    	"filter": filterMark, 
+	       	   	"element": "div", 
+			   	"className": "tooltip", 
+			   	"each": function(node){
+	        		var tooltip = document.createElement("span");
+					tooltip.className = "tooltiptext";
+					tooltip.innerHTML = lines[line];
+					node.appendChild(tooltip);
+	    		},
+	    		"done": function(total) {
+	    			if (total > 0) {
+	    				console.log("total > 0")
+	    				foundWordWithMultipleMatches = true;
+	    			}
+	    			else {
+	    				console.log("total = 0, continuing search")
+	    			}
+	    		}
+			};
+			var context = document.querySelectorAll("P");
+			var instance = new Mark(context);
+			tooltipText = lines[line];
+			instance.mark(lastWord, options);
+		}
+	}
 }
+
+(function(){
+
+	// check prior inclusion and version
+	var done = false;
+	var script = document.createElement("script");
+	script.src = "https://cdn.jsdelivr.net/mark.js/8.4.2/mark.min.js";
+	script.onload = script.onreadystatechange = function(){
+		if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
+			done = true;
+			initMyBookmarklet();
+		}
+	};
+
+	document.getElementsByTagName("head")[0].appendChild(script);
+
+
+	var tooltipCSS = document.createElement("style");
+	tooltipCSS.type = "text/css";
+	tooltipCSS.innerHTML = " \
+	/* Tooltip container */ \
+.tooltip { \
+    position: relative; \
+    display: inline-block; \
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */ \
+} \
+ \
+/* Tooltip text */ \
+.tooltip .tooltiptext { \
+    visibility: hidden; \
+    width: 120px; \
+    background-color: #555; \
+    color: #fff; \
+    text-align: center; \
+    padding: 5px 0; \
+    border-radius: 6px; \
+ \
+    /* Position the tooltip text */ \
+    position: absolute; \
+    z-index: 1; \
+    bottom: 125%; \
+    left: 50%; \
+    margin-left: -60px; \
+} \
+ \
+/* Tooltip arrow */ \
+.tooltip .tooltiptext::after { \
+    content: \"\"; \
+    position: absolute; \
+    top: 100%; \
+    left: 50%; \
+    margin-left: -5px; \
+    border-width: 5px; \
+    border-style: solid; \
+    border-color: #555 transparent transparent transparent; \
+} \
+ \
+/* Show the tooltip text when you mouse over the tooltip container */ \
+.tooltip:hover .tooltiptext { \
+    visibility: visible; \
+    opacity: 1; \
+}"
+	document.getElementsByTagName("head")[0].appendChild(tooltipCSS);
+	
+	function initMyBookmarklet() {
+		(window.myBookmarklet = function() {
+			// your JavaScript code goes here!
+			ingredify()
+		})();
+	}
+
+})();
 
 function getSelectedLines() {
 	var text = getSelectedText();
+	if (!text) {
+		alert("select ingredients");
+		return;
+	}
 	var lines = text.split("\n").filter(function(s){
 		return s.length > 0;
 	});
@@ -21,7 +161,7 @@ function getSelectedText() {
             for (var i = 0, len = sel.rangeCount; i < len; ++i) {
                 container.appendChild(sel.getRangeAt(i).cloneContents());
             }
-            text = container.innerText || container.textContent;
+            text = container.textContent;
         }
     } else if (typeof document.selection != "undefined") {
         if (document.selection.type == "Text") {

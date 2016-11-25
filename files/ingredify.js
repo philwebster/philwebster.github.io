@@ -29,7 +29,7 @@ function ingredify() {
 	for (var line in lines) {
 		var strippedline = lines[line].replace(/\([^\)]*\)$/, "");
 		var tokenizedLine = strippedline.split(" ");
-		
+
 		if (tokenizedLine.length == 1) {
 			continue;
 		}
@@ -60,6 +60,8 @@ function ingredify() {
 			instance.mark(lastWord, options);
 		}
 	}
+
+	clearSelection();
 }
 
 (function(){
@@ -167,5 +169,25 @@ function getSelectedText() {
     }
     else{
         return text;
+    }
+}
+
+function clearSelection() {
+    var sel;
+    if ( (sel = document.selection) && sel.empty ) {
+        sel.empty();
+    } else {
+        if (window.getSelection) {
+            window.getSelection().removeAllRanges();
+        }
+        var activeEl = document.activeElement;
+        if (activeEl) {
+            var tagName = activeEl.nodeName.toLowerCase();
+            if ( tagName == "textarea" ||
+                    (tagName == "input" && activeEl.type == "text") ) {
+                // Collapse the selection to the end
+                activeEl.selectionStart = activeEl.selectionEnd;
+            }
+        }
     }
 }

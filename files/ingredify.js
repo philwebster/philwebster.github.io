@@ -2,10 +2,7 @@ var tooltipText;
 var isFirstOccurrence = true;
 
 function filterMark(textNode, foundTerm, totalCounter, counter) {
-	console.log("filtermark");
-	console.log(textNode);
 	if (textNode.parentNode.className == "tooltip" || textNode.parentNode.className == "tooltiptext" || isFirstOccurrence == true) {
-		console.log("doing the right thing");
 		isFirstOccurrence = false;
 		return false;
 	}
@@ -22,7 +19,6 @@ function insertTooltip(node) {
 function ingredify() {
 
 	var lines = getSelectedLines();
-	console.log(lines);
 	
 	if (!lines) {
 		return;
@@ -31,15 +27,12 @@ function ingredify() {
     // Determine selected options
 
 	for (var line in lines) {
-		console.log("marking line: " + lines[line]);
 		var tokenizedLine = lines[line].split(" ");
 		var foundWordWithMultipleMatches = false
 
 		while (foundWordWithMultipleMatches != true && tokenizedLine.length > 0) {
 			lastWord = tokenizedLine.pop()
-			console.log("last word: " + lastWord)
 			lastWord = lastWord.replace(/^[,]|[,]$/g, "");
-			console.log("last word cleaned: " + lastWord)
 		    var options = {
 		    	"filter": filterMark, 
 	       	   	"element": "div", 
@@ -52,11 +45,7 @@ function ingredify() {
 	    		},
 	    		"done": function(total) {
 	    			if (total > 0) {
-	    				console.log("total > 0")
 	    				foundWordWithMultipleMatches = true;
-	    			}
-	    			else {
-	    				console.log("total = 0, continuing search")
 	    			}
 	    		}
 			};

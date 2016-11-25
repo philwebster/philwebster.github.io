@@ -28,6 +28,9 @@ function ingredify() {
 
 	for (var line in lines) {
 		var tokenizedLine = lines[line].split(" ");
+		if (tokenizedLine.length == 1) {
+			continue;
+		}
 		var foundWordWithMultipleMatches = false
 
 		while (foundWordWithMultipleMatches != true && tokenizedLine.length > 0) {

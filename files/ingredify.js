@@ -27,8 +27,9 @@ function ingredify() {
     // Determine selected options
 
 	for (var line in lines) {
-		line.replace(/\([^\)]*\)$/, "");
-		var tokenizedLine = line.split(" ");
+		var strippedline = lines[line].replace(/\([^\)]*\)$/, "");
+		var tokenizedLine = strippedline.split(" ");
+		
 		if (tokenizedLine.length == 1) {
 			continue;
 		}

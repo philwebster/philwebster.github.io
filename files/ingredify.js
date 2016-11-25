@@ -27,7 +27,7 @@ function ingredify() {
     // Determine selected options
 
 	for (var line in lines) {
-		var strippedLine = line.replace(/\([^\)]*\)$, "");
+		var strippedLine = line.replace(/\([^\)]*\)$/, "");
 		var tokenizedLine = strippedLine.split(" ");
 		if (tokenizedLine.length == 1) {
 			continue;
@@ -35,7 +35,7 @@ function ingredify() {
 		var foundWordWithMultipleMatches = false
 
 		while (foundWordWithMultipleMatches != true && tokenizedLine.length > 0) {
-			lastWord = tokenizedLine.pop()
+			lastWord = tokenizedLine.pop();
 			lastWord = lastWord.replace(/^[,]|[,]$/g, "");
 		    var options = {
 		    	"filter": filterMark, 

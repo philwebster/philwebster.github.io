@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:itunesu="http://www.itunesu.com/feed" version="2.0">
+<channel>
+<link>http://philwebster.github.io</link>
+<language>en-us</language>
+<copyright>&#xA9;2016</copyright>
+<webMaster>webster.phil@gmail.com (Philip Webster)</webMaster>
+<managingEditor>webster.phil@gmail.com (Philip Webster)</managingEditor>
+<image>
+<url>http://philwebster.github.io/podcast/me.jpg</url>
+<title>Picture of Me</title>
+<link>http://philwebster.github.io</link>
+</image>
+<itunes:owner>
+<itunes:name>Philip Webster</itunes:name>
+<itunes:email>webster.phil@gmail.com</itunes:email>
+</itunes:owner>
+<itunes:category text="Education">
+<itunes:category text="Higher Education" />
+</itunes:category>
+<itunes:keywords></itunes:keywords>
+<itunes:explicit>no</itunes:explicit>
+<itunes:Page href="http://philwebster.github.io/podcast/me.jpg" />
+<atom:link href="http://philwebster.github.io/podcast/feed.xml" rel="self" type="application/rss+xml" />
+<pubDate>Tues, 13 Dec 2016 00:00:00 PT</pubDate>
+<title>Merry Christmas</title>
+<itunes:author>Me</itunes:author>
+<description>It is me talking about Christmas.</description>
+<itunes:summary>It is me talking about Christmas.</itunes:summary>
+<itunes:subtitle>Still just me talking.</itunes:subtitle>
+<lastBuildDate>Tues, 13 Dec 2016 00:00:00 PT</lastBuildDate>
+<item>
+<title>Verbose title of the episode</title>
+<description>Verbose description of the episode.</description>
+<itunes:summary>Duplicate of above verbose description.</itunes:summary>
+<itunes:subtitle>Short description of the episode - 255 character max.</itunes:subtitle>
+<enclosure url="http://philwebster.github.io/podcast/episode0.m4a" type="audio/mpeg" length="1" />
+<guid>http://philwebster.github.io/podcast/episode0.m4a</guid>
+<itunes:duration>0:00:06</itunes:duration>
+<pubDate>Tues, 13 Dec 2016 00:00:00 PT</pubDate>
+</item>
+</channel>
+</rss>
